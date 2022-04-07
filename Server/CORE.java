@@ -10,6 +10,12 @@ public class CORE
         System.out.println("adding client thread");
         CORE.theClientStreams.add(ps);
     }
+    
+    public static synchronized void removeClientThreadPrintStream(PrintStream ps)
+    {
+        CORE.theClientStreams.remove(ps);
+    }
+
 
     public static void broadcastMessage(String message)
     {

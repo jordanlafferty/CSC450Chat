@@ -16,29 +16,12 @@ public class chatClient
             public void run()
             {
                 String line;
-                String quit = "/quit";
-                int n = 0;
+
     
                 while(true)
                 {
                     line = clientInput.nextLine();
-                    if (line.equals(quit))
-                    {
-                        try
-                        {
-                            clientQuit.setProgramQuit(1);
-                            return;
-                        }
-                        catch (Exception e)
-                        {
-                            System.err.println("Error Quitting");
-                            e.printStackTrace();
-                        }
-                    }
-                    else
-                    {
-                        System.out.println(line);
-                    }
+                    System.out.println(line);   
                     
                 }
                 
@@ -46,11 +29,24 @@ public class chatClient
         };
 
         lt.start();
+        String line;
+        String quit = "/quit";
 
-        while(clientQuit.checkForQuit() == false)
+        while(true)
         {
+            
+            line = localInput.nextLine();
             clientOutput.println(localInput.nextLine());
+            if (line.equals(quit))
+            {
+                break;
+            }
+            
         }
+        System.out.println("goodbye");
+        lt.wait();
+        System.exit(0);
+
         
     }
 }
