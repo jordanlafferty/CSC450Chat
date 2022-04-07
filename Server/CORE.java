@@ -5,17 +5,18 @@ public class CORE
 {
     private static ArrayList<PrintStream> theClientStreams = new ArrayList<PrintStream>();
     
-    public static void addClientThreadPrintStream(PrintStream ps)
+    public static synchronized void changeTheClientStreams(PrintStream ps, String doWhatWIthIt)
     {
-        System.out.println("adding client thread");
-        CORE.theClientStreams.add(ps);
+        if(doWhatWIthIt.equals("add"))
+        {
+            System.out.println("adding client thread");
+            CORE.theClientStreams.add(ps);
+        }
+        else if (doWhatWIthIt.equals("remove"))
+        {
+            CORE.theClientStreams.remove(ps);
+        }
     }
-    
-    public static synchronized void removeClientThreadPrintStream(PrintStream ps)
-    {
-        CORE.theClientStreams.remove(ps);
-    }
-
 
     public static void broadcastMessage(String message)
     {
