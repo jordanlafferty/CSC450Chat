@@ -26,4 +26,9 @@ public class CORE
             ps.println(message);
         }
     }
+
+    public static void broadcastFile()
+    {
+        System.out.println("File has been transferred!");
+    }
 }
