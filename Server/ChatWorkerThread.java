@@ -48,8 +48,8 @@ public class ChatWorkerThread extends Thread
             try
             {
                 this.clientOutput.println("Type file location:");
-                int n = 0;
-                byte[]bufArr = new byte[4092];
+                int x = 0;
+                byte[]bufArr = new byte[4092]; // buffer array to hold the bytes of a file
                 String fileAddress = clientInput.nextLine();
                 if(fileAddress.equals("/quit"))
                 {
@@ -57,11 +57,17 @@ public class ChatWorkerThread extends Thread
                         CORE.changeTheClientStreams(this.clientOutput, "remove");
                         break;
                 }
-                
+                //lets the client know what they are recieving/sending
                 CORE.broadcastMessage(fileAddress + " is the requested file");
+                // sets the file output to the file address
                 FileOutputStream fileOutput = new FileOutputStream(fileAddress);
-                while((n = this.inData.read(bufArr)) != -1){
-                    fileOutput.write(bufArr,0,n);
+
+                // gets the bytes until there are none left in the file
+                while((x = this.inData.read(bufArr)) != -1)
+                {
+                    // writes to the file output stream
+                    fileOutput.write(bufArr,0,x);
+                    //clears the output
                     fileOutput.flush();
                 }
                 fileOutput.close();

@@ -45,15 +45,20 @@ public class chatClient
             {
                 break;
             }
+            // gets the file address of where it should go in the recieving client, and makes a new file
             File theFile = new File(line);
             clientOutput.println(localInput.nextLine());
-            int n = 0;
+            //buffer array that holds the bytes of the file
+            int x = 0;
             byte[]buf = new byte[4092];
+            // gets the file
             FileInputStream incomingFile = new FileInputStream(theFile);
-            while((n =incomingFile.read(buf)) != -1)
+            //reads in each byte of the file so it can get recieve it
+            while((x =incomingFile.read(buf)) != -1)
             {
-                outData.write(buf,0,n);
-                outData.flush();
+                outData.write(buf,0,x); //writes each byte into the output stream
+                clientOutput.println("Writing the file"); //check to see if it is working
+                outData.flush(); // clears the dataStream
 
             }
             incomingFile.close();
